@@ -1,12 +1,9 @@
-import React from 'react';
-import TopBar from 'components/TopBar';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+const Home = () => {
   return (
     <div className="App">
-      <TopBar />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
@@ -25,4 +22,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
