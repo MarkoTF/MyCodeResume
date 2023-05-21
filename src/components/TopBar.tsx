@@ -18,6 +18,8 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const pages = ['Home', 'About', 'Skills', 'Blog', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -25,7 +27,6 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function TopBar() {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-
 
   return (
     <AppBar position="static" color="transparent">
@@ -37,6 +38,9 @@ function TopBar() {
 }
 
 const DesktopTopBar = () => {
+
+  const theme = useTheme();
+
   return (
     <Toolbar disableGutters={false}>
       <Box sx={{ display: 'flex', flex: 1, flexDirection: 'row' }} >
@@ -55,7 +59,7 @@ const DesktopTopBar = () => {
         {pages.map((page) => (
           <Button
             key={page}
-            sx={{ my: 2, textTransform: 'none' }}
+            sx={{ textTransform: 'none', fontSize: '1.2rem', paddingX: 2, color: theme.palette.black.main }}
           >
             {page}
           </Button>
@@ -63,7 +67,8 @@ const DesktopTopBar = () => {
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'right', flex: 1 }}>
-        <Account />
+        <IconButton><TwitterIcon fontSize='large' sx={{color: '#55ACEE'}} /></IconButton>
+        <IconButton><GitHubIcon fontSize='large' sx={{color: theme.palette.black.main}} /></IconButton>
       </Box>
     </Toolbar>
   );

@@ -1,6 +1,25 @@
-import { ThemeOptions, createTheme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
-export const themeOptions: ThemeOptions = {
+declare module '@mui/material/styles' {
+    interface Palette {
+        black: Palette['primary']
+    }
+
+    interface PaletteOptions {
+        black: PaletteOptions['primary']
+    }
+}
+
+export let theme = createTheme({
+    palette: {
+        mode: 'light',
+        black: {
+            main: '#383838'
+        }
+    }
+});
+
+theme = createTheme(theme, {
   palette: {
     mode: 'light',
     primary: {
@@ -8,10 +27,10 @@ export const themeOptions: ThemeOptions = {
     },
     secondary: {
       main: '#A5A6F6',
-      contrastText: '#383838',
+      contrastText: theme.palette.black.main,
     },
     text: {
-      primary: '#2D2D2D',
+      primary: theme.palette.black.main,
     },
   },
   shape: {
@@ -36,6 +55,4 @@ export const themeOptions: ThemeOptions = {
         }
     }
   }
-};
-
-export const theme = createTheme(themeOptions);
+});
