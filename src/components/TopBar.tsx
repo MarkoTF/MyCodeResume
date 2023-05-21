@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
+import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 
 const pages = ['Home', 'About', 'Skills', 'Blog', 'Contact'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -40,13 +41,19 @@ const DesktopTopBar = () => {
     <Toolbar disableGutters={false}>
       <Box sx={{ display: 'flex', flex: 1, flexDirection: 'row' }} >
         <Logo />
-        <Button>CV</Button>
+        <Button
+          variant='contained'
+          endIcon={<FileDownloadOutlinedIcon />}
+        >
+          CV
+        </Button>
       </Box>
+
       <Box sx={{ flex: 2, justifyContent: 'center', display: 'flex' }}>
         {pages.map((page) => (
           <Button
             key={page}
-            sx={{ my: 2, display: 'block' }}
+            sx={{ my: 2, textTransform: 'none' }}
           >
             {page}
           </Button>
@@ -72,7 +79,7 @@ const MobileTopBar = () => {
   };
 
   return (
-    <Toolbar disableGutters={false}>
+    <Toolbar disableGutters={true}>
       <Box sx={{ flexGrow: 1, display: 'flex' }}>
         <IconButton
           size="large"
@@ -98,9 +105,6 @@ const MobileTopBar = () => {
           }}
           open={Boolean(anchorElNav)}
           onClose={handleCloseNavMenu}
-          sx={{
-            display: { xs: 'block', md: 'none' },
-          }}
         >
           {pages.map((page) => (
             <MenuItem key={page} onClick={handleCloseNavMenu}>
@@ -109,12 +113,8 @@ const MobileTopBar = () => {
           ))}
         </Menu>
       </Box>
-      <MobileLogo />
 
-      <Box sx={{ display: 'flex', flex: 1, flexDirection: 'row' }} >
-        <Logo />
-        <Button>CV</Button>
-      </Box>
+      <MobileLogo />
 
       <Box sx={{ display: 'flex', justifyContent: 'right', flex: 1 }}>
         <Account />
