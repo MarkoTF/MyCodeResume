@@ -24,6 +24,16 @@ export const themeOptions: ThemeOptions = {
                 boxShadow: 'none'
             }
         }
+    },
+    MuiButton: {
+        styleOverrides: {
+            root: {
+                boxShadow: 'none'
+            },
+            endIcon: {
+                marginLeft: 4
+            }
+        }
     }
   }
 };

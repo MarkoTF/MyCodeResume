@@ -43,6 +43,8 @@ const DesktopTopBar = () => {
         <Logo />
         <Button
           variant='contained'
+          size='small'
+          color='secondary'
           endIcon={<FileDownloadOutlinedIcon />}
         >
           CV
