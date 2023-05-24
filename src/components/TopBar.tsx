@@ -14,6 +14,8 @@ import {
   Avatar,
   useMediaQuery,
   useTheme,
+  Tabs,
+  Tab,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AdbIcon from '@mui/icons-material/Adb';
@@ -21,24 +23,29 @@ import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
-const pages = ['Home', 'About', 'Skills', 'Blog', 'Contact'];
+interface TopBarTypes {
+  pages: string[],
+  openedTab: number,
+  handleChangeTab: (event: React.SyntheticEvent<Element, Event>, value: any) => void
+}
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-function TopBar() {
+function TopBar(props: TopBarTypes) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   return (
     <AppBar position="static" color="transparent">
       <Container maxWidth="xl">
-        {!isMobile ? <DesktopTopBar/> : <MobileTopBar />}
+        {!isMobile ? <DesktopTopBar {...props}/> : <MobileTopBar {...props}/>}
       </Container>
     </AppBar>
   );
 }
 
-const DesktopTopBar = () => {
-
+const DesktopTopBar = (props: TopBarTypes) => {
+  const { pages, openedTab, handleChangeTab } = props;
   const theme = useTheme();
 
   return (
@@ -56,14 +63,19 @@ const DesktopTopBar = () => {
       </Box>
 
       <Box sx={{ flex: 2, justifyContent: 'center', display: 'flex' }}>
-        {pages.map((page) => (
-          <Button
-            key={page}
-            sx={{ textTransform: 'none', fontSize: '1.2rem', paddingX: 2, color: theme.palette.black.main }}
-          >
-            {page}
-          </Button>
-        ))}
+        <Tabs
+          value={openedTab}
+          onChange={handleChangeTab}
+          indicatorColor='secondary'
+        >
+          {pages.map((page) => (
+            <Tab
+              key={page}
+              label={page}
+              sx={{ textTransform: 'none', fontSize: '1.2rem', paddingX: 2, color: theme.palette.black.main }}
+            />
+          ))}
+        </Tabs>
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'right', flex: 1 }}>
@@ -74,7 +86,8 @@ const DesktopTopBar = () => {
   );
 }
 
-const MobileTopBar = () => {
+const MobileTopBar = (props: TopBarTypes) => {
+  const { pages } = props;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
