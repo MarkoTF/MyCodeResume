@@ -1,22 +1,22 @@
 import { createTheme } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
-    interface Palette {
-        black: Palette['primary']
-    }
+  interface Palette {
+    black: Palette['primary']
+  }
 
-    interface PaletteOptions {
-        black: PaletteOptions['primary']
-    }
+  interface PaletteOptions {
+    black: PaletteOptions['primary']
+  }
 }
 
 export let theme = createTheme({
-    palette: {
-        mode: 'light',
-        black: {
-            main: '#383838'
-        }
+  palette: {
+    mode: 'light',
+    black: {
+      main: '#383838'
     }
+  }
 });
 
 theme = createTheme(theme, {
@@ -38,21 +38,29 @@ theme = createTheme(theme, {
   },
   components: {
     MuiAppBar: {
-        styleOverrides: {
-            root: {
-                boxShadow: 'none'
-            }
+      styleOverrides: {
+        root: {
+          boxShadow: 'none'
         }
+      }
     },
     MuiButton: {
-        styleOverrides: {
-            root: {
-                boxShadow: 'none'
-            },
-            endIcon: {
-                marginLeft: 4
-            }
+      styleOverrides: {
+        root: {
+          boxShadow: 'none'
+        },
+        endIcon: {
+          marginLeft: 4
         }
+      }
+    },
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          height: 4,
+          borderRadius: 10
+        }
+      }
     }
   }
 });
