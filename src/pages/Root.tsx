@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { ReactNode, useState, SyntheticEvent } from 'react';
 import TopBar from 'components/TopBar';
 import Home from 'pages/Home';
 import About from 'pages/About';
@@ -14,7 +14,7 @@ const pages = [
 const Root = () => {
   const [openedTab, setOpenedTab] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, tabId: number) => {
+  const handleChange = (event: SyntheticEvent, tabId: number) => {
     setOpenedTab(tabId);
   };
 
@@ -26,7 +26,7 @@ const Root = () => {
         handleChangeTab={handleChange}
       />
       {pages.map((page, index) => (
-        <PageWrapper openedTab={openedTab} pageId={index}>
+        <PageWrapper key={index} openedTab={openedTab} pageId={index}>
           {page.component}
         </PageWrapper>
       ))}
@@ -36,7 +36,6 @@ const Root = () => {
 
 const PageWrapper = (props: { openedTab: number, pageId: number, children: ReactNode }) => {
   const { pageId, openedTab, children } = props;
-  console.log("PageWrapper", pageId, openedTab);
   return (
     <div hidden={openedTab !== pageId}>
       { children }
