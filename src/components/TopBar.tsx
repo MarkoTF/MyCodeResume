@@ -152,19 +152,17 @@ const DownloadCVMenu = () => {
 }
 
 const Logo = () => {
-  const theme = useTheme();
-
   return (
     <Typography
       variant="h6"
       noWrap
       component="a"
       href=""
+      color='primary'
       sx={{
         mr: 2,
         display: 'flex',
         fontWeight: 700,
-        color: theme.palette.black.main,
         textDecoration: 'none',
       }}
     >
@@ -174,8 +172,6 @@ const Logo = () => {
 }
 
 const MobileLogo = ({ sx, ...props }: BoxProps) => {
-  const theme = useTheme();
-  
   return (
     <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', ...sx }} {...props}>
       <Typography
@@ -183,10 +179,10 @@ const MobileLogo = ({ sx, ...props }: BoxProps) => {
         noWrap
         component="a"
         href=""
+        color='primary'
         sx={{
           display: 'flex',
           fontWeight: 700,
-          color: theme.palette.black.main,
           textDecoration: 'none',
         }}
       >
