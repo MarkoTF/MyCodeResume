@@ -7,31 +7,26 @@ import {
   Container,
   Button,
   MenuItem,
-  Tooltip,
   Box,
   BoxProps,
   Menu,
-  Avatar,
   useMediaQuery,
   useTheme,
   Tabs,
   Tab,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import AdbIcon from '@mui/icons-material/Adb';
 import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import TwitterIcon from '@mui/icons-material/Twitter';
 
-interface TopBarTypes {
+interface TopBarProps {
   pages: string[],
   openedTab: number,
   handleChangeTab: (event: React.SyntheticEvent<Element, Event>, value: any) => void
 }
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
-function TopBar(props: TopBarTypes) {
+function TopBar(props: TopBarProps) {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -44,22 +39,17 @@ function TopBar(props: TopBarTypes) {
   );
 }
 
-const DesktopTopBar = (props: TopBarTypes) => {
+const DesktopTopBar = (props: TopBarProps) => {
   const { pages, openedTab, handleChangeTab } = props;
   const theme = useTheme();
 
   return (
     <Toolbar disableGutters={false}>
-      <Box sx={{ display: 'flex', flex: 1, flexDirection: 'row' }} >
-        <Logo />
-        <Button
-          variant='contained'
-          size='small'
-          color='secondary'
-          endIcon={<FileDownloadOutlinedIcon />}
-        >
-          CV
-        </Button>
+      <Box sx={{ display: 'flex', flex: 1, flexDirection: 'row'}} >
+        <Box sx={{mr: 2}}>
+          <Logo/>
+        </Box>
+        <DownloadCVMenu/>
       </Box>
 
       <Box sx={{ flex: 2, justifyContent: 'center', display: 'flex' }}>
@@ -86,9 +76,10 @@ const DesktopTopBar = (props: TopBarTypes) => {
   );
 }
 
-const MobileTopBar = (props: TopBarTypes) => {
+const MobileTopBar = (props: TopBarProps) => {
   const { pages } = props;
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
+  const theme = useTheme();
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -99,18 +90,20 @@ const MobileTopBar = (props: TopBarTypes) => {
   };
 
   return (
-    <Toolbar disableGutters={true}>
-      <Box sx={{ flexGrow: 1, display: 'flex' }}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="menu-appbar"
-          aria-haspopup="true"
-          onClick={handleOpenNavMenu}
-          color="inherit"
-        >
-          <MenuIcon />
-        </IconButton>
+    <Toolbar disableGutters={true} sx={{display: {xs: 'flex'}, justifyContent: {xs: 'space-between'}}}>
+      <Box sx={{ flex: { sm: 1}, display: 'flex', alignItems: 'center' }}>
+        <Box sx={{mr: {sm: 2}}}>
+          <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={handleOpenNavMenu}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
+        </Box>
         <Menu
           id="menu-appbar"
           anchorEl={anchorElNav}
@@ -132,103 +125,72 @@ const MobileTopBar = (props: TopBarTypes) => {
             </MenuItem>
           ))}
         </Menu>
+        <DownloadCVMenu />
       </Box>
 
-      <MobileLogo />
+      <Box sx={{justifyContent: 'center', flex: {sm: 1}}}>
+        <MobileLogo />
+      </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'right', flex: 1 }}>
-        <Account />
+      <Box sx={{ display: 'flex', justifyContent: 'right', flex: {sm: 1} }}>
+        <IconButton><GitHubIcon fontSize='large' sx={{color: theme.palette.black.main}} /></IconButton>
       </Box>
     </Toolbar>
 )};
 
-const Account = () => {
-  const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-  const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorElUser(event.currentTarget);
-  };
-
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
-
+const DownloadCVMenu = () => {
   return (
-    <>
-      <Tooltip title="Open settings">
-        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-        </IconButton>
-      </Tooltip>
-      <Menu
-        sx={{ mt: '45px' }}
-        id="menu-appbar"
-        anchorEl={anchorElUser}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        keepMounted
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'right',
-        }}
-        open={Boolean(anchorElUser)}
-        onClose={handleCloseUserMenu}
-      >
-        {settings.map((setting) => (
-          <MenuItem key={setting} onClick={handleCloseUserMenu}>
-            <Typography textAlign="center">{setting}</Typography>
-          </MenuItem>
-        ))}
-      </Menu>
-    </>
+    <Button
+      variant='contained'
+      size='small'
+      color='secondary'
+      endIcon={<FileDownloadOutlinedIcon />}
+    >
+      CV
+    </Button>
   );
 }
 
 const Logo = () => {
+  const theme = useTheme();
+
   return (
     <Typography
       variant="h6"
       noWrap
       component="a"
-      href="/"
+      href=""
       sx={{
         mr: 2,
         display: 'flex',
-        fontFamily: 'monospace',
         fontWeight: 700,
-        letterSpacing: '.3rem',
-        color: 'inherit',
+        color: theme.palette.black.main,
         textDecoration: 'none',
       }}
     >
-      LOGO
+      MarkTF
     </Typography>
   );
 }
 
 const MobileLogo = ({ sx, ...props }: BoxProps) => {
+  const theme = useTheme();
+  
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', ...sx }} {...props}>
-      <AdbIcon sx={{ display: 'flex', mr: 1 }} />
+    <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center', ...sx }} {...props}>
       <Typography
         variant="h5"
         noWrap
         component="a"
         href=""
         sx={{
-          mr: 2,
           display: 'flex',
-          flexGrow: 1,
-          fontFamily: 'monospace',
           fontWeight: 700,
-          letterSpacing: '.3rem',
-          color: 'inherit',
+          color: theme.palette.black.main,
           textDecoration: 'none',
         }}
       >
-        LOGO
+        MarkTF
       </Typography>
     </Box>
   );
