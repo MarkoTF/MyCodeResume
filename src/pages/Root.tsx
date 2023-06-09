@@ -1,4 +1,5 @@
 import React, { ReactNode, useState, SyntheticEvent } from 'react';
+import { Box } from '@mui/material';
 import TopBar from 'components/TopBar';
 import Home from 'pages/Home';
 import About from 'pages/About';
@@ -19,7 +20,14 @@ const Root = () => {
   };
 
   return (
-    <div className="App">
+    <Box sx={{
+      background: {
+        xs: "linear-gradient(110deg, rgba(52,245,236,0.8) 0%, rgba(57,166,201,0) 47%)",
+        md: "linear-gradient(135deg, rgba(52,245,236,0.8) 0%, rgba(57,166,201,0) 50%)"
+      },
+      minHeight: '100vh',
+    }}
+    >
       <TopBar
         pages={pages.map(page => page.title)}
         openedTab={openedTab}
@@ -30,7 +38,7 @@ const Root = () => {
           {page.component}
         </PageWrapper>
       ))}
-    </div>
+    </Box>
   );
 }
 
