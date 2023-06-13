@@ -61,6 +61,24 @@ theme = createTheme(theme, {
           borderRadius: 10
         }
       }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderColor: 'white',
+          background: 'rgba(255, 255, 255, 0.2)',
+          boxShadow: '0px 4px 40px rgba(0, 0, 0, 0.05)',
+          boxSizing: 'border-box',
+          backdropFilter: 'blur(10px)'
+        }
+      }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        h3: {
+          fontSize: '2.7rem',
+        },
+      }
     }
   }
 });
