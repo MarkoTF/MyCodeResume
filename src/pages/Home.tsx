@@ -1,16 +1,16 @@
-import { Container, Grid, Paper, Typography, useTheme } from "@mui/material";
+import { Avatar, Box, Container, Grid, Paper, Tooltip, Typography, useTheme } from "@mui/material";
 
 const Home = () => {
+  const theme = useTheme();
+
   return (
     <Container>
-      <Grid container>
+      <Grid container spacing={theme.spacing(2)}>
         <Grid item xs={12}>
           <GreetingCard />
         </Grid>
         <Grid item xs={12}>
-          <div>
-            This is the home
-          </div>
+          <Skills />
         </Grid>
         <Grid item xs={12}>
           <div>
@@ -37,6 +37,48 @@ const GreetingCard = () => {
         Computer Systems Engineer & Full Stack Developer
       </Typography>
     </Paper>
+  );
+}
+
+const Skills = () => {
+  const theme = useTheme();
+
+  const skills = [//TODO: fetch from API
+    {
+      name: 'Python',
+      icon: './python.png'
+    },
+    {
+      name: 'React',
+      icon: './logo192.png'
+    },
+    {
+      name: 'Docker',
+      icon: './docker.png'
+    },
+    {
+      name: 'Git',
+      icon: './git.png'
+    },
+    {
+      name: 'WordPress',
+      icon: './wordpress.png'
+    },
+  ];
+
+  return (
+    <Box>
+      <Typography variant="h6" sx={{fontWeight: 700, marginBottom: theme.spacing(1)}}>
+        Skills
+      </Typography>
+      <Box sx={{display: 'flex', flexWrap: "wrap", gap: theme.spacing(2)}}>
+        {skills.map((skill, index) => (
+          <Tooltip key={index} title={skill.name}>
+            <Avatar key={index} alt={skill.name} src={skill.icon} variant="square" /> 
+          </Tooltip>
+        ))}
+      </Box>
+    </Box>
   );
 }
 
