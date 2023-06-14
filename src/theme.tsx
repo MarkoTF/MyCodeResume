@@ -75,6 +75,9 @@ theme = createTheme(theme, {
     },
     MuiTypography: {
       styleOverrides: {
+        root: {
+          color: theme.palette.black.main
+        },
         h3: {
           fontSize: '2.7rem',
         },
