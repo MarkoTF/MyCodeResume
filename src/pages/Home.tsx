@@ -157,8 +157,8 @@ const RecentProjects = () => {
 
 const ProjectCard = () => {
   return (
-    <Box sx={{minWidth: 200}}>
-      <AspectRatioImg aspectRatio={65} src="/profile.png" style={{borderRadius: 10}} />
+    <Box sx={{minWidth: "50vw"}}>
+      <AspectRatioImg aspectRatio={65} src="/project-example.png" style={{borderRadius: 10}} />
     </Box>
   );
 }
