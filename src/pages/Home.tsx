@@ -1,24 +1,40 @@
-import { Avatar, Box, Container, Grid, Paper, Tooltip, Typography, useTheme } from "@mui/material";
+import { CSSProperties } from "react";
+import { Avatar, Box, Container, Grid, Paper, Stack, Tooltip, Typography, useTheme } from "@mui/material";
 
 const Home = () => {
   const theme = useTheme();
 
   return (
-    <Container>
-      <Grid container spacing={theme.spacing(2)}>
-        <Grid item xs={12}>
+    <>
+    <Grid container spacing={theme.spacing(5)}>
+      <Grid item xs={12}>
+        <Container>
           <GreetingCard />
-        </Grid>
-        <Grid item xs={12}>
-          <Skills />
-        </Grid>
-        <Grid item xs={12}>
-          <div>
-            This is the home
-          </div>
-        </Grid>
+        </Container>
       </Grid>
-    </Container>
+      <Grid item xs={12}>
+        <Container sx={{pl: 0}}>
+          <Grid container spacing={theme.spacing(5)}>
+            <Grid item xs={12}>
+              <Grid container>
+                <Grid item xs={5}>
+                  <AspectRatioImg aspectRatio={200} src="/profile.png" />
+                </Grid>
+                <Grid item xs={7}>
+                  <Skills />
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Container>
+      </Grid>
+      <Grid item xs={12}>
+        <Container sx={{pr: 0}}>
+          <RecentProjects />
+        </Container>
+      </Grid>
+    </Grid>
+    </>
   );
 }
 
@@ -37,6 +53,40 @@ const GreetingCard = () => {
         Computer Systems Engineer & Full Stack Developer
       </Typography>
     </Paper>
+  );
+}
+
+interface AspectRatioImgProps {
+  src: string,
+  aspectRatio?: number,
+  style?: CSSProperties
+}
+
+const AspectRatioImg = (props: AspectRatioImgProps) => {
+  const { aspectRatio, style, src } = props;
+  return (
+    <Box
+      sx={{
+        position: 'relative',
+        width: '100%',
+        paddingBottom: `${aspectRatio}%`,  /* set the aspect ratio */
+      }}
+    >
+      <img 
+        src={src} 
+        alt="Profile" 
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          borderRadius: '10px',
+          ...style
+        }}
+      />
+    </Box>
   );
 }
 
@@ -78,6 +128,38 @@ const Skills = () => {
           </Tooltip>
         ))}
       </Box>
+    </Box>
+  );
+}
+
+const RecentProjects = () => {
+  return (
+    <Box>
+      <Typography variant="h5" fontWeight="bold">
+        Recent projects
+      </Typography>
+      <Stack
+        direction="row"
+        spacing={2}
+        sx={{ overflowX: 'auto', marginTop: 2 }}
+      >
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+        <ProjectCard />
+      </Stack>
+    </Box>
+  );
+}
+
+const ProjectCard = () => {
+  return (
+    <Box sx={{minWidth: 200}}>
+      <AspectRatioImg aspectRatio={65} src="/profile.png" />
     </Box>
   );
 }
