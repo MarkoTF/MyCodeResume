@@ -82,7 +82,6 @@ const AspectRatioImg = (props: AspectRatioImgProps) => {
           width: '100%',
           height: '100%',
           objectFit: 'cover',
-          borderRadius: '10px',
           ...style
         }}
       />
@@ -159,7 +158,7 @@ const RecentProjects = () => {
 const ProjectCard = () => {
   return (
     <Box sx={{minWidth: 200}}>
-      <AspectRatioImg aspectRatio={65} src="/profile.png" />
+      <AspectRatioImg aspectRatio={65} src="/profile.png" style={{borderRadius: 10}} />
     </Box>
   );
 }
