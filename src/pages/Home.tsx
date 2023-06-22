@@ -29,7 +29,7 @@ const Home = () => {
         </Container>
       </Grid>
       <Grid item xs={12}>
-        <Container sx={{pr: 0}}>
+        <Container>
           <RecentProjects />
         </Container>
       </Grid>
